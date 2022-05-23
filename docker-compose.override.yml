@@ -1,0 +1,23 @@
+---
+version: '3.4'
+
+services:
+  db:
+    env_file:
+      - docker/.env-db
+    image: "postgres:14.2-alpine"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  web:
+    build:
+      target: django-dev
+    env_file:
+      - docker/.env-web
+    volumes:
+      - .:/code
+    ports:
+      - "127.0.0.1:8000:80"
+
+volumes:
+  db-data:
