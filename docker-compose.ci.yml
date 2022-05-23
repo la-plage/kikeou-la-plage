@@ -9,13 +9,13 @@ services:
     volumes:
       - db-data-test:/var/lib/postgresql/data
 
-  web-test:
+  kikeou-test:
     build:
       dockerfile: docker/Dockerfile
       context: .
       target: django-dev
     env_file:
-      - docker/.env-web
+      - docker/.env-kikeou
     depends_on:
       - db-test
 

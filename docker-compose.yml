@@ -5,7 +5,7 @@ services:
   db:
     image: "postgres:14.2-alpine"
 
-  web:
+  kikeou:
     build:
       dockerfile: docker/Dockerfile
       context: .

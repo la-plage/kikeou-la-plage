@@ -9,11 +9,11 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
-  web:
+  kikeou:
     build:
       target: django-dev
     env_file:
-      - docker/.env-web
+      - docker/.env-kikeou
     volumes:
       - .:/code
     ports:

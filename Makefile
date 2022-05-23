@@ -21,4 +21,4 @@ isort-fix:
 .PHONY: run-tests
 run-tests:
 	docker-compose -f docker-compose.ci.yml build
-	docker-compose -f docker-compose.ci.yml run web-test pytest
+	docker-compose -f docker-compose.ci.yml run kikeou-test pytest
