@@ -2,10 +2,6 @@ FROM python:3.10.4-slim-buster AS django
 
 USER root
 
-
-RUN mkdir -p /requirements
-WORKDIR /requirements
-
 # TODO git can be removed once we use pypi package in place of repo
 RUN apt-get -y update --no-install-recommends \
     && apt-get install -y \
@@ -14,6 +10,8 @@ RUN apt-get -y update --no-install-recommends \
 
 RUN mkdir -p /requirements
 COPY requirements/base.txt /usr/local/pip-requirements/
+# FIXME currently, package source are downloaed in "WORKDIR" and package egg is not with other packages => workaround now is to run `pip install` from /requirements
+WORKDIR /requirements
 RUN pip3 install \
     --quiet \
     --no-binary :none: \
@@ -29,6 +27,7 @@ COPY manage.py /code/
 FROM django AS django-dev
 
 COPY requirements/dev.txt /usr/local/pip-requirements/
+# FIXME currently, package source are downloaed in "WORKDIR" and package egg is not with other packages => workaround now is to run `pip install` from /requirements
 WORKDIR /requirements
 RUN pip3 install \
     --quiet \
