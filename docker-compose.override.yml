@@ -12,6 +12,8 @@ services:
   kikeou:
     build:
       target: django-dev
+    depends_on:
+      - db
     env_file:
       - docker/.env-kikeou
     volumes:
